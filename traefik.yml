@@ -21,7 +21,8 @@ certificatesResolvers:
       storage: /acme.json
       dnsChallenge:
         provider: namecheap
-        delayBeforeCheck: 30
+        propagation:
+          delayBeforeChecks: 30
         resolvers:
           - "1.1.1.1:53"
           - "9.9.9.9:53"
