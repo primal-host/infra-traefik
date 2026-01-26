@@ -15,6 +15,16 @@ certificatesResolvers:
       storage: /acme.json
       httpChallenge:
         entryPoint: http
+  letsencrypt-dns:
+    acme:
+      email: admin@primal.host
+      storage: /acme.json
+      dnsChallenge:
+        provider: namecheap
+        delayBeforeCheck: 30
+        resolvers:
+          - "1.1.1.1:53"
+          - "9.9.9.9:53"
 
 providers:
   docker:

@@ -1,2 +1,5 @@
 # ACME certificate storage (contains private keys)
 acme.json
+
+# Namecheap API credentials
+namecheap.env
