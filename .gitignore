@@ -1,0 +1,2 @@
+# ACME certificate storage (contains private keys)
+acme.json
