@@ -1,7 +1,7 @@
 services:
-  traefik:
+  infra-traefik:
     image: traefik:v3.6
-    container_name: traefik
+    container_name: infra-traefik
     restart: unless-stopped
     security_opt:
       - no-new-privileges:true
