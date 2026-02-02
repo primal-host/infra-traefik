@@ -1,6 +1,7 @@
 services:
   infra-traefik:
-    image: traefik:v3.6
+    build: .
+    image: infra-traefik
     container_name: infra-traefik
     restart: unless-stopped
     security_opt:
@@ -15,6 +16,11 @@ services:
       - ./traefik.yml:/etc/traefik/traefik.yml:ro
       - ./dynamic:/etc/traefik/dynamic:ro
       - ./acme.json:/acme.json
+      # 1440.news service configs
+      - /Users/primal/apps/atproto/1440.news/pds/traefik.yml:/etc/traefik/dynamic/1440-pds.yml:ro
+      - /Users/primal/apps/atproto/1440.news/watcher/traefik.yml:/etc/traefik/dynamic/1440-watcher.yml:ro
+      - /Users/primal/apps/atproto/1440.news/publish/traefik.yml:/etc/traefik/dynamic/1440-publish.yml:ro
+      - /Users/primal/apps/atproto/1440.news/tracker/traefik.yml:/etc/traefik/dynamic/1440-tracker.yml:ro
     networks:
       - proxy
     labels:
