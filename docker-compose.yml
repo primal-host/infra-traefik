@@ -16,7 +16,8 @@ services:
       - ./dynamic:/etc/traefik/dynamic:ro
       - ./acme.json:/acme.json
     networks:
-      - proxy
+      - infra
+      - atproto
     labels:
       - "traefik.enable=true"
       # Local dashboard
@@ -46,6 +47,7 @@ services:
       - "traefik.http.middlewares.https-redirect.redirectscheme.permanent=true"
 
 networks:
-  proxy:
-    name: proxy
+  infra:
+    external: true
+  atproto:
     external: true
