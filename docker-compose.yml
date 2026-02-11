@@ -20,22 +20,23 @@ services:
       - atproto
     labels:
       - "traefik.enable=true"
-      # Local dashboard
-      - "traefik.http.routers.traefik.entrypoints=http"
-      - "traefik.http.routers.traefik.rule=Host(`traefik.localhost`)"
-      - "traefik.http.routers.traefik.service=api@internal"
       # Dashboard basic auth
       - "traefik.http.middlewares.dashboard-auth.basicauth.users=primal:$$2y$$05$$Yh6/uSbtfzy3H1K9zMdK6uF358GOW0.FtkSRTxLmfb0kYDG4Lo4F6"
-      # primal.host - HTTPS with Let's Encrypt
-      - "traefik.http.routers.primal-host.rule=Host(`primal.host`)"
-      - "traefik.http.routers.primal-host.entrypoints=https"
-      - "traefik.http.routers.primal-host.tls.certresolver=letsencrypt"
-      - "traefik.http.routers.primal-host.service=api@internal"
-      - "traefik.http.routers.primal-host.middlewares=dashboard-auth"
-      # primal.host - HTTP redirect
-      - "traefik.http.routers.primal-host-redirect.rule=Host(`primal.host`)"
-      - "traefik.http.routers.primal-host-redirect.entrypoints=http"
-      - "traefik.http.routers.primal-host-redirect.middlewares=https-redirect"
+      # Dashboard - local (HTTP)
+      - "traefik.http.routers.traefik-local.rule=Host(`traefik.localhost`)"
+      - "traefik.http.routers.traefik-local.entrypoints=http"
+      - "traefik.http.routers.traefik-local.service=api@internal"
+      - "traefik.http.routers.traefik-local.middlewares=dashboard-auth"
+      # Dashboard - production (HTTPS)
+      - "traefik.http.routers.traefik-prod.rule=Host(`traefik.primal.host`)"
+      - "traefik.http.routers.traefik-prod.entrypoints=https"
+      - "traefik.http.routers.traefik-prod.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.traefik-prod.service=api@internal"
+      - "traefik.http.routers.traefik-prod.middlewares=dashboard-auth"
+      # Dashboard - production HTTP redirect
+      - "traefik.http.routers.traefik-prod-redirect.rule=Host(`traefik.primal.host`)"
+      - "traefik.http.routers.traefik-prod-redirect.entrypoints=http"
+      - "traefik.http.routers.traefik-prod-redirect.middlewares=https-redirect"
       # truevector.llc - HTTPS with Let's Encrypt
       - "traefik.http.routers.truevector-llc.rule=Host(`truevector.llc`)"
       - "traefik.http.routers.truevector-llc.entrypoints=https"
