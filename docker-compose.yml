@@ -21,7 +21,7 @@ services:
     labels:
       - "traefik.enable=true"
       # Dashboard basic auth
-      - "traefik.http.middlewares.dashboard-auth.basicauth.users=primal:$$2y$$05$$Yh6/uSbtfzy3H1K9zMdK6uF358GOW0.FtkSRTxLmfb0kYDG4Lo4F6"
+      - "traefik.http.middlewares.dashboard-auth.basicauth.users=primal:$$2y$$05$$su6ZcFZfIvIY.yorGtC1RuF3eohY78twLb/Ew7U7PbWnEBmJFzPpC"
       # Dashboard - local (HTTP)
       - "traefik.http.routers.traefik-local.rule=Host(`traefik.localhost`)"
       - "traefik.http.routers.traefik-local.entrypoints=http"
