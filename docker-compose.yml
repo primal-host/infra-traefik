@@ -20,19 +20,17 @@ services:
       - atproto
     labels:
       - "traefik.enable=true"
-      # Dashboard basic auth
-      - "traefik.http.middlewares.dashboard-auth.basicauth.users=primal:$$2y$$05$$su6ZcFZfIvIY.yorGtC1RuF3eohY78twLb/Ew7U7PbWnEBmJFzPpC"
       # Dashboard - local (HTTP)
       - "traefik.http.routers.traefik-local.rule=Host(`traefik.localhost`)"
       - "traefik.http.routers.traefik-local.entrypoints=http"
       - "traefik.http.routers.traefik-local.service=api@internal"
-      - "traefik.http.routers.traefik-local.middlewares=dashboard-auth"
+      - "traefik.http.routers.traefik-local.middlewares=noknok-auth@docker"
       # Dashboard - production (HTTPS)
       - "traefik.http.routers.traefik-prod.rule=Host(`traefik.primal.host`)"
       - "traefik.http.routers.traefik-prod.entrypoints=https"
       - "traefik.http.routers.traefik-prod.tls.certresolver=letsencrypt"
       - "traefik.http.routers.traefik-prod.service=api@internal"
-      - "traefik.http.routers.traefik-prod.middlewares=dashboard-auth"
+      - "traefik.http.routers.traefik-prod.middlewares=noknok-auth@docker"
       # Dashboard - production HTTP redirect
       - "traefik.http.routers.traefik-prod-redirect.rule=Host(`traefik.primal.host`)"
       - "traefik.http.routers.traefik-prod-redirect.entrypoints=http"
@@ -42,7 +40,7 @@ services:
       - "traefik.http.routers.truevector-llc.entrypoints=https"
       - "traefik.http.routers.truevector-llc.tls.certresolver=letsencrypt"
       - "traefik.http.routers.truevector-llc.service=api@internal"
-      - "traefik.http.routers.truevector-llc.middlewares=dashboard-auth"
+      - "traefik.http.routers.truevector-llc.middlewares=noknok-auth@docker"
       # truevector.llc - HTTP redirect
       - "traefik.http.routers.truevector-llc-redirect.rule=Host(`truevector.llc`)"
       - "traefik.http.routers.truevector-llc-redirect.entrypoints=http"
