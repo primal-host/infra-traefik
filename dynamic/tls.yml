@@ -2,4 +2,9 @@ tls:
   options:
     default:
       minVersion: VersionTLS12
-      sniStrict: true
+  stores:
+    default:
+      defaultGeneratedCert:
+        resolver: letsencrypt
+        domain:
+          main: primal.host
